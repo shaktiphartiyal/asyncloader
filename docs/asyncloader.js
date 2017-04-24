@@ -39,14 +39,30 @@
                 scriptOne.parentNode.insertBefore(script, scriptOne);
             }
         },
-        loadStyle:function(url){
-            let head  = document.getElementsByTagName('head')[0];
-            let link  = document.createElement('link');
-            link.rel  = 'stylesheet';
-            link.type = 'text/css';
-            link.href = url;
-            link.media = 'all';
-            head.appendChild(link);
+        loadStyle:function(url, callback, media){
+            return new Promise((resolve, reject) => {
+                let head  = document.getElementsByTagName('head')[0];
+                let link  = document.createElement('link');
+                link.type = 'text/css';
+                link.rel = 'stylesheet';
+                if (!media)
+                {
+                    link.media = 'all';
+                }
+                else
+                {
+                    link.media = media;
+                }
+                link.href = url;
+                link.onload = () => {
+                    resolve();
+                    if(typeof(callback) == "function")
+                    {
+                        callback();
+                    }
+                };
+                head.appendChild(link);
+            });
         },
     };
     window.asyncloader = ψ;
