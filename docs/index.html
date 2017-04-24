@@ -36,6 +36,10 @@
         </div>
         <div class="col-md-7">
             <a name="about">About asyncloader.js</a>
+            <br/>
+            <p>
+                <img id="sampleImage" class="images" height="200" width="200" />
+            </p>
         </div>
         <div class="col-md-3" id="console" style="background-color: #000000;min-height: 100%;color:#00CC00;">
             <h2>Console</h2>
@@ -56,5 +60,7 @@
             $('#console').append('<br/>Dojo JS Loaded');
         });
     }, '//ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.js');
+    asyncloader.preloadImages(['https://unsplash.it/200/201','https://unsplash.it/201/200','https://unsplash.it/202/200','https://unsplash.it/200/202']);
+    asyncloader.loadImage('#sampleImage.', 'https://unsplash.it/200/200/?random');
 </script>
 </html>

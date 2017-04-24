@@ -64,6 +64,61 @@
                 head.appendChild(link);
             });
         },
+        preloadImages:function(images){
+            if(typeof(images) == "object")
+            {
+                for(let i = 0; i < images.length; i++)
+                {
+                    let myImage = new Image();
+                    myImage.src = images[i];
+                }
+            }
+            else
+            {
+                let myImage = new Image();
+                myImage.src = images;
+            }
+        },
+        loadImage:function(selector, url) {
+            if(!selector)
+            {
+                console.error("Invalid selector given for loadImage()");
+                return;
+            }
+            let img = new Image();
+            if(selector.charAt(0) == "#")
+            {
+                selector = document.getElementById(selector.substr(1));
+                img.onload = function(){
+                    try
+                    {
+                        selector.src = this.src;
+                    }
+                    catch(e)
+                    {
+                        console.error("Invalid Selector");
+                    }
+                };
+            }
+            else if(selector.charAt(0) == '.')
+            {
+                selector = document.getElementsByClassName(selector.substr(1));
+                img.onload = function(){
+                    try
+                    {
+                        for(let i=0; i < selector.length; i++)
+                        {
+                            selector[i].src = this.src;
+                        }
+                    }
+                    catch(e)
+                    {
+                        console.error("Invalid Selector");
+                    }
+                };
+            }
+            img.src = url;
+        },
     };
     window.asyncloader = ψ;
 })();
