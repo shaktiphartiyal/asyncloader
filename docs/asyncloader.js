@@ -86,34 +86,35 @@
                 return;
             }
             let img = new Image();
+            let selectorx = null;
             if(selector.charAt(0) == "#")
             {
-                selector = document.getElementById(selector.substr(1));
+                selectorx = document.getElementById(selector.substr(1));
                 img.onload = function(){
                     try
                     {
-                        selector.src = this.src;
+                        selectorx.src = this.src;
                     }
                     catch(e)
                     {
-                        console.error("Invalid Selector");
+                        console.error("Invalid Selector "+selector);
                     }
                 };
             }
             else if(selector.charAt(0) == '.')
             {
-                selector = document.getElementsByClassName(selector.substr(1));
+                selectorx = document.getElementsByClassName(selector.substr(1));
                 img.onload = function(){
                     try
                     {
-                        for(let i=0; i < selector.length; i++)
+                        for(let i=0; i < selectorx.length; i++)
                         {
-                            selector[i].src = this.src;
+                            selectorx[i].src = this.src;
                         }
                     }
                     catch(e)
                     {
-                        console.error("Invalid Selector");
+                        console.error("Invalid Selector "+selector);
                     }
                 };
             }
